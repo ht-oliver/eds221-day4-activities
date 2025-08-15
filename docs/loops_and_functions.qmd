@@ -1,0 +1,96 @@
+---
+title: "Day 4 Activities"
+author: "Henry Oliver"
+format: html
+---
+
+Task 1
+```{r}
+
+
+# Make a list of days
+weekdays <- c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
+
+#Made a list of transects
+transects <- c("Transect A", "Transect B", "Transect C")
+
+# Create an empty matrix (soon to be filled)
+weekdays0 <- matrix( ncol = length(transects), nrow = length(weekdays))
+
+# Create two "loops", the outer loop goes through each ROW, the inner loop goes through each column. The outer loop pics a chair (weekdays), and the inner loop fills it in sequence  with gifts (transects)
+
+for (i in seq_along(weekdays)) {
+  for (j in seq_along(transects)) {
+    
+# Create a variable that will provide the instructions with what to print in each box. This is within the second for loop.
+var01 <- paste0(weekdays[i], "-", transects[j])
+
+# Then create your final object, which will be a filled matrix, that is an index of i's and j's, according to the instructions with what to print
+weekdays0[i, j] <- var01
+}
+}
+
+weekdays0
+
+
+
+
+
+
+```
+Task 2 - Write a function for F=ma
+```{r}
+force <- function(mass, accel) {
+  (F0 <- (mass * accel))
+print(paste("The resulting force is", F0, "Newtons"))
+}
+
+force(2,3)
+```
+Task 3 - Please god help me
+```{r}
+sci_name <- c("Chanos chanos", "Sphyraena barracuda", "Caranx ignobilis")
+common_name <- c("Milkfish", "Great barracuda", "Giant trevally")
+a_est <- c(0.0905, 0.0181, 0.0353)
+b_est <- c(2.52, 3.27, 3.05)
+
+
+
+fish_parms = data.frame(sci_name, common_name, a_est, b_est)
+fish_parms
+
+fish_weight <- function(fish_name, tot_length) {
+  
+  fish_sub <- fish_parms |> 
+    filter(common_name == fish_name)
+  
+  wt <- fish_sub$a_est * (tot_length ^ fish_sub$b_est)
+  
+  return(wt)
+}
+
+fish_weight(fish_name = "Milkfish", tot_length = 60)
+
+
+# Create the vector of lengths
+lengths_vector <- seq(from = 0, to = 100, by = 1)
+
+# Send it to the function: 
+milkfish_weights <- fish_weight(fish_name = "Milkfish", tot_length = lengths_vector)
+  
+```
+
+
+Task 4
+```{r}
+
+wave_power <- function(wave_height, wave_period) {
+  0.5 * (wave_height ^ 2) * wave_period
+}
+
+wave_heights <- seq(from = 0, to = 3, by = 0.2)
+
+wave_power(wave_height = wave_heights, wave_period = 8)
+```
+
+
